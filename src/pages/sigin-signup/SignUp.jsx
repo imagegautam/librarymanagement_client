@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { DefaultLayout } from "../../components/layout/DefaultLayout";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
-import { postNewUser } from "../../helpers/axiosHelper";
+
 import { toast } from "react-toastify";
+import { postNewUser } from "../../features/users/userAxios";
 
 const SignUp = () => {
   const [form, setForm] = useState({});

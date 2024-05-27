@@ -1,13 +1,25 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { DefaultLayout } from "../../components/layout/DefaultLayout";
-import { Row, Col, Form, Button, Toast } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import { toast } from "react-toastify";
-import { loginUser } from "../../helpers/axiosHelper";
+import { loginUser } from "../../features/users/userAxios";
+import { getUserObj } from "../../features/users/userAction";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const emailRef = useRef("");
   const passRef = useRef("");
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userInfo);
+  console.log(user);
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -18,12 +30,15 @@ const SignIn = () => {
       return toast.error("Both field must be filled");
     }
 
-    const {status, message, tokens} = await loginUser({ email, password });
-    toast[status] (message);
-    // store token in the sectionn 
-
+    const { status, message, tokens } = await loginUser({ email, password });
+    toast[status](message);
+    //store tokens in the sessions
     sessionStorage.setItem("accessJWT", tokens.accessJWT);
-    localStorage.setItem("refreshJWT", tokens.refreshJWT)
+    localStorage.setItem("refreshJWT", tokens.refreshJWT);
+
+    if (status === "success") {
+      dispatch(getUserObj());
+    }
   };
 
   const inputs = [
@@ -34,6 +49,7 @@ const SignIn = () => {
       required: true,
       placeholder: "Sam@email.com",
       inputRef: emailRef,
+      value: "a@a.com",
     },
     {
       label: "Password",
@@ -42,6 +58,7 @@ const SignIn = () => {
       required: true,
       placeholder: "*******",
       inputRef: passRef,
+      value: "12345",
     },
   ];
 

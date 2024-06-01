@@ -1,61 +1,48 @@
-export const inputFields =[{
+export const inputFields = [
+  {
     label: "Title",
-    name: 'title',
+    name: "title",
     type: "text",
     required: true,
     placeholder: "Learn Javascript",
-
   },
-
   {
     label: "Author",
-    name: 'author',
+    name: "author",
     type: "text",
     required: true,
     placeholder: "Uncle Bob",
-
   },
-
+  {
+    label: "Thumbnail",
+    name: "thumbnail",
+    type: "url",
+    required: true,
+    placeholder: "https://path-to-image.com",
+  },
   {
     label: "ISBN",
-    name: 'isbn',
+    name: "isbn",
     type: "text",
     required: true,
-    placeholder: "627hs739hhj",
-
+    placeholder: "9876LKJHHG",
   },
-
   {
     label: "Published Year",
-    name: 'publishedYear',
+    name: "publishedYear",
     type: "number",
     min: "1000",
     required: true,
-    placeholder: "2024",
-
+    placeholder: "2020",
   },
-
-  {
-    label: "Thumbnail",
-    name: 'thumbnail',
-    type: "url",
-    required: true,
-    placeholder: "https://react-bootstrap.netlify.app/",
-
-  },
-
   {
     label: "Description",
-    name: 'description',
+    name: "description",
     type: "text",
     as: "textarea",
     maxLength: "5000",
     required: true,
-    placeholder: "Book Summary",
-    rows:5,
-
+    placeholder: "Book summary ...",
+    rows: "5",
   },
-
-
-
-]
+];

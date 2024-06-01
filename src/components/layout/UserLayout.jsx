@@ -12,7 +12,7 @@ export const UserLayout = ({ children, pageTitle }) => {
       <div>
         {/* header  */}
         <Header />
-        <Container fluid >
+        <Container fluid>
           <Row>
             <Col xs={3} className="bg-dark text-light">
               <div className="p-3">

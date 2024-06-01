@@ -1,32 +1,26 @@
-import { useState } from "react"
+import { useState } from "react";
 import { toast } from "react-toastify";
 
-const handleOnChange = ({e, form, setForm})=>{
-    const {name, value} = e.target
-    setForm({
-      ...form, 
-      [name]:value
-    });
-
-  };
-
-  const handleOnSubmit = ({e,form}) =>{
-    e.preventDefault();
-    toast.success("TODO");
-    console.log(form);
+const handleOnChange = ({ e, form, setForm }) => {
+  let {checked, name, value } = e.target;
+  console.log(name, checked)
+  if(name==="status"){
+    value = checked ? "active" :"inactive";
   }
+  setForm({
+    ...form,
+    [name]: value,
+  });
+};
 
+const useForm = (initialState) => {
+  const [form, setForm] = useState(initialState);
 
-
-
-const useForm= (initialState)=>{
-    const [form, setForm] = useState({initialState})
-    
-      return {
-        form, 
-        handleOnChange:(e)=>handleOnChange({e, form, setForm}),
-        handleOnSubmit: (e)=>handleOnSubmit({e, form})
-      };
+  return {
+    form,
+    setForm,
+    handleOnChange: (e) => handleOnChange({ e, form, setForm }),
+  };
 };
 
 export default useForm;
